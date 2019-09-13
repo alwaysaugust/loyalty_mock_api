@@ -1,4 +1,9 @@
-interface ITokenManagement {
-  createNew: (symbol: string, name: string, supply: number) => string; //mintable/non mintable
-  updateSupply: (supply: number) => void;
+export interface ITokenManagement {
+  createNew(
+    adminKey: string,
+    symbol: string,
+    name: string,
+    supply: number
+  ): Promise<string>;
+  updateSupply(supply: number): boolean;
 }

@@ -1,6 +1,6 @@
-interface IAccountManagement {
+export interface IAccountManagement {
   registerAdmin: (id: string) => boolean;
   registerUser: (id: string) => boolean;
   generatePK: () => string;
-  changeAllowance: (amount: number) => void;
+  changeAllowance: (amount: number) => boolean;
 }

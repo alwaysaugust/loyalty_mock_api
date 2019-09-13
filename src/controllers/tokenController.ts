@@ -1,21 +1,22 @@
 // External Dependancies
-const boom = require("boom");
-
-// Get Data Models
-const Token = require("../models/Token");
+import boom = require("boom");
+import { ITokenManagement } from "../blockchain/ITokenManagement";
+import * as ModuleProvider from "../blockchain/ModuleProvider"; // Get Data Models
+import Token = require("../models/Token");
+const tokenModule: ITokenManagement = ModuleProvider.getTokenModule();
 
 // Get all tokens
-exports.getTokens = async (req, reply) => {
+export async function getTokens(req, reply): Promise<object> {
   try {
     const tokens = await Token.find();
     return tokens;
   } catch (err) {
     throw boom.boomify(err);
   }
-};
+}
 
 // Get single token by ID
-exports.getSingleToken = async (req, reply) => {
+export async function getSingleToken(req, reply): Promise<object> {
   try {
     const id = req.params.id;
     const token = await Token.findById(id);
@@ -23,20 +24,21 @@ exports.getSingleToken = async (req, reply) => {
   } catch (err) {
     throw boom.boomify(err);
   }
-};
+}
 
 // Add a new token
-exports.addToken = async (req, reply) => {
+export async function addToken(req, reply): Promise<object> {
   try {
     const token = new Token(req.body);
+    const hash = await tokenModule.createNew("", "", "", 0); // todo add types
     return token.save();
   } catch (err) {
     throw boom.boomify(err);
   }
-};
+}
 
 // Update an existing token
-exports.updateToken = async (req, reply) => {
+export async function updateToken(req, reply): Promise<object> {
   try {
     const id = req.params.id;
     const token = req.body;
@@ -46,15 +48,4 @@ exports.updateToken = async (req, reply) => {
   } catch (err) {
     throw boom.boomify(err);
   }
-};
-
-// Delete a token
-exports.deleteToken = async (req, reply) => {
-  try {
-    const id = req.params.id;
-    const token = await Token.findByIdAndRemove(id);
-    return token;
-  } catch (err) {
-    throw boom.boomify(err);
-  }
-};
+}
