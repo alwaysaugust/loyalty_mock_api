@@ -1,0 +1,17 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "src/config/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "adjacent-overload-signatures": false,
+    "object-literal-sort-keys": false
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false
+  }
+}
