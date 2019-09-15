@@ -4,6 +4,6 @@ export interface ITokenManagement {
     symbol: string,
     name: string,
     supply: number
-  ): Promise<string>;
+  ): Promise<{ contractAddress: string; contractOwner: string }>;
   updateSupply(supply: number): boolean;
 }

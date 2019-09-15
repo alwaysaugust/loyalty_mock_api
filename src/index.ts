@@ -38,6 +38,8 @@ mongoose
 
 // Declare all routes
 routes.forEach(route => {
+  // tslint:disable-next-line: no-console
+  console.log(route.url);
   server.route(route);
 });
 // Run the server!

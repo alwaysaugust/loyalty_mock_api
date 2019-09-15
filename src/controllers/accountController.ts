@@ -13,3 +13,11 @@ export async function addAccount(req, reply): Promise<object> {
     throw boom.boomify(err);
   }
 }
+export async function getKeyPair(req, reply): Promise<object> {
+  try {
+    const account = accountModule.generatePK();
+    return { publicKey: account.publicKey, privateKey: account.privateKey };
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+}

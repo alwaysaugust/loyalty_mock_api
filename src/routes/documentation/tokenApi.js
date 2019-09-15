@@ -8,11 +8,10 @@ const tokenModelSchemaResponse = {
   __v: { type: "number" }
 };
 const newTokenModelSchemaRequest = {
-  address: { type: "string" },
   symbol: { type: "string" },
   name: { type: "string" },
   supply: { type: "number" },
-  owner: { type: "string" }
+  signingKey: { type: "string" }
 };
 exports.addTokenSchema = {
   description: "Create a new token",
@@ -30,31 +29,7 @@ exports.addTokenSchema = {
     }
   }
 };
-exports.updateTokenSchema = {
-  description: "Create a new token",
-  tags: ["tokens"],
-  summary: "Creates new token with given values",
-  params: {
-    type: "object",
-    properties: {
-      id: {
-        type: "string",
-        description: "token id"
-      }
-    }
-  },
-  body: {
-    type: "object",
-    properties: newTokenModelSchemaRequest
-  },
-  response: {
-    200: {
-      description: "Successful response",
-      type: "object",
-      properties: tokenModelSchemaResponse
-    }
-  }
-};
+
 exports.getTokenWithParamsSchema = {
   description: "Get token",
   tags: ["tokens"],
@@ -62,7 +37,7 @@ exports.getTokenWithParamsSchema = {
   params: {
     type: "object",
     properties: {
-      id: {
+      owner: {
         type: "string",
         description: "token id"
       }
@@ -75,9 +50,4 @@ exports.getTokenWithParamsSchema = {
       properties: tokenModelSchemaResponse
     }
   }
-};
-exports.getTokensSchema = {
-  description: "Get tokens",
-  tags: ["tokens"],
-  summary: "Fetches all tokens"
 };

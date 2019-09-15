@@ -6,10 +6,14 @@ export class TokenManagement implements ITokenManagement {
     symbol: string,
     name: string,
     supply: number
-  ): Promise<string> {
-    const hash: string | boolean = await deploy(adminKey, name, symbol, supply);
-    if ((hash as string) !== undefined) {
-      return hash as string;
+  ): Promise<{ contractAddress: string; contractOwner: string }> {
+    const data:
+      | { contractAddress: string; contractOwner: string }
+      | boolean = await deploy(adminKey, name, symbol, supply);
+    if (
+      (data as { contractAddress: string; contractOwner: string }) !== undefined
+    ) {
+      return data as { contractAddress: string; contractOwner: string };
     } else {
       throw new Error("Could not deploy token");
     }

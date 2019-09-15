@@ -2,7 +2,7 @@
 import boom = require("boom");
 import { ITokenManagement } from "../blockchain/ITokenManagement";
 import * as ModuleProvider from "../blockchain/ModuleProvider"; // Get Data Models
-import Token = require("../models/Token");
+import { Token } from "../models/Token";
 const tokenModule: ITokenManagement = ModuleProvider.getTokenModule();
 
 // Get all tokens
@@ -18,8 +18,8 @@ export async function getTokens(req, reply): Promise<object> {
 // Get single token by ID
 export async function getSingleToken(req, reply): Promise<object> {
   try {
-    const id = req.params.id;
-    const token = await Token.findById(id);
+    const owner = req.params.owner;
+    const token = await Token.findOne({ owner });
     return token;
   } catch (err) {
     throw boom.boomify(err);
@@ -30,21 +30,17 @@ export async function getSingleToken(req, reply): Promise<object> {
 export async function addToken(req, reply): Promise<object> {
   try {
     const token = new Token(req.body);
-    const hash = await tokenModule.createNew("", "", "", 0); // todo add types
+    // tslint:disable-next-line: no-console
+    console.log(req.params);
+    const data = await tokenModule.createNew(
+      req.body.signingKey,
+      token.symbol,
+      token.name,
+      token.supply
+    ); // todo add types
+    token.address = data.contractAddress;
+    token.owner = data.contractOwner;
     return token.save();
-  } catch (err) {
-    throw boom.boomify(err);
-  }
-}
-
-// Update an existing token
-export async function updateToken(req, reply): Promise<object> {
-  try {
-    const id = req.params.id;
-    const token = req.body;
-    const { ...updateData } = token;
-    const update = await Token.findByIdAndUpdate(id, updateData, { new: true });
-    return update;
   } catch (err) {
     throw boom.boomify(err);
   }

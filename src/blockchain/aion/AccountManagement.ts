@@ -9,7 +9,7 @@ export class AccountManagement implements IAccountManagement {
   public registerUser(id: string): boolean {
     return true;
   }
-  public generatePK(): string {
+  public generatePK(): { publicKey: string; privateKey: string } {
     return new Accounts().create();
   }
   public changeAllowance(amount: number): boolean {
