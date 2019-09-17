@@ -20,7 +20,11 @@ export async function getSingleToken(req, reply): Promise<object> {
   try {
     const owner = req.params.owner;
     const token = await Token.findOne({ owner });
-    return token;
+    if (token) {
+      return token;
+    } else {
+      throw Error("No tokens for owner");
+    }
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -31,7 +35,9 @@ export async function addToken(req, reply): Promise<object> {
   try {
     const token = new Token(req.body);
     // tslint:disable-next-line: no-console
-    console.log(req.params);
+    console.log(req.body);
+    // tslint:disable-next-line: no-console
+    console.log(token);
     const data = await tokenModule.createNew(
       req.body.signingKey,
       token.symbol,

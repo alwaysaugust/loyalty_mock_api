@@ -8,6 +8,8 @@ const accountModule: IAccountManagement = ModuleProvider.getAccountModule();
 export async function addAccount(req, reply): Promise<object> {
   try {
     // todo
+    // username
+    // password
     return {};
   } catch (err) {
     throw boom.boomify(err);

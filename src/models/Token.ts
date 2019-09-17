@@ -1,5 +1,5 @@
 // External Dependancies
-import { prop, Typegoose } from "typegoose";
+import { prop, Typegoose } from "@hasezoey/typegoose";
 class TokenModel extends Typegoose {
   @prop()
   public address: string;
