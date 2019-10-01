@@ -1,3 +1,5 @@
+const { hookModel } = require("./commonApi");
+
 const tokenModelSchemaResponse = {
   _id: { type: "string" },
   address: { type: "string" },
@@ -11,12 +13,16 @@ const newTokenModelSchemaRequest = {
   symbol: { type: "string" },
   name: { type: "string" },
   supply: { type: "number" },
+  hook: { type: "object", properties: hookModel },
   signingKey: { type: "string" }
 };
+const successResponse = {
+  status: { type: "boolean" }
+};
 exports.addTokenSchema = {
-  description: "Create a new token",
+  description: "Creates new token with given values",
   tags: ["tokens"],
-  summary: "Creates new token with given values",
+  summary: "Create a new token",
   body: {
     type: "object",
     properties: newTokenModelSchemaRequest
@@ -25,15 +31,15 @@ exports.addTokenSchema = {
     200: {
       description: "Successful response",
       type: "object",
-      properties: tokenModelSchemaResponse
+      properties: successResponse
     }
   }
 };
 
 exports.getTokenWithParamsSchema = {
-  description: "Get token",
+  description: "Returns a balance of tokens and details on each token.",
   tags: ["tokens"],
-  summary: "Fetches a token with provided id",
+  summary: "Get token",
   params: {
     type: "object",
     properties: {

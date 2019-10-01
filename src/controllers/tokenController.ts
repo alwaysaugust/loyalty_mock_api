@@ -33,20 +33,22 @@ export async function getSingleToken(req, reply): Promise<object> {
 // Add a new token
 export async function addToken(req, reply): Promise<object> {
   try {
-    const token = new Token(req.body);
-    // tslint:disable-next-line: no-console
-    console.log(req.body);
-    // tslint:disable-next-line: no-console
-    console.log(token);
-    const data = await tokenModule.createNew(
-      req.body.signingKey,
-      token.symbol,
-      token.name,
-      token.supply
-    ); // todo add types
-    token.address = data.contractAddress;
-    token.owner = data.contractOwner;
-    return token.save();
+    // const token = new Token(req.body);
+    // // tslint:disable-next-line: no-console
+    // console.log(req.body);
+    // // tslint:disable-next-line: no-console
+    // console.log(token);
+    // const data = await tokenModule.createNew(
+    //   req.body.signingKey,
+    //   token.symbol,
+    //   token.name,
+    //   token.supply
+    // ); // todo add types
+    // token.address = data.contractAddress;
+    // token.owner = data.contractOwner;
+    await new Promise(res => setTimeout(res, 1000));
+    return { status: true };
+    //return token.save();
   } catch (err) {
     throw boom.boomify(err);
   }

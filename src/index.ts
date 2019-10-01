@@ -15,7 +15,6 @@ export const server: fastify.FastifyInstance<
 > = fastify({
   logger: true
 });
-
 // Register Swagger
 server.register(swagger, swaggerConfig);
 server.register(helmet, {

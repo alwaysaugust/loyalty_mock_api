@@ -23,3 +23,13 @@ export async function getKeyPair(req, reply): Promise<object> {
     throw boom.boomify(err);
   }
 }
+
+export async function transfer(req, reply): Promise<object> {
+  return { todo: "todo" };
+}
+export async function history(req, reply): Promise<object> {
+  return { todo: "todo" };
+}
+export async function hook(req, reply): Promise<object> {
+  return { todo: "todo" };
+}
