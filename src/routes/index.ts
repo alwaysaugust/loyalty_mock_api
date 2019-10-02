@@ -6,7 +6,11 @@ import {
   hook,
   transfer
 } from "../controllers/accountController";
-import { addToken, getSingleToken } from "../controllers/tokenController";
+import {
+  addToken,
+  getSingleToken,
+  getTokens
+} from "../controllers/tokenController";
 import * as accountDocs from "./documentation/accountApi";
 import * as tokenDocs from "./documentation/tokenApi";
 
@@ -20,7 +24,7 @@ export let routes: RouteOptions[] = [
   {
     method: "GET",
     url: "/api/tokens/:account",
-    handler: getSingleToken,
+    handler: getTokens,
     schema: tokenDocs.getTokenWithParamsSchema
   },
   {
@@ -30,7 +34,7 @@ export let routes: RouteOptions[] = [
     schema: accountDocs.getKeyPair
   },
   {
-    method: "GET",
+    method: "POST",
     url: "/api/accounts/transfer",
     handler: transfer,
     schema: accountDocs.transfer
@@ -42,7 +46,7 @@ export let routes: RouteOptions[] = [
     schema: accountDocs.history
   },
   {
-    method: "GET",
+    method: "POST",
     url: "/api/accounts/transferHook",
     handler: hook,
     schema: accountDocs.hook

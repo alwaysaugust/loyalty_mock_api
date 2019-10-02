@@ -28,7 +28,7 @@ export async function transfer(req, reply): Promise<object> {
   return { todo: "todo" };
 }
 export async function history(req, reply): Promise<object> {
-  return { todo: "todo" };
+  return [{ timeStamp: "", metaData: "", recipient: "", amount: 0 }];
 }
 export async function hook(req, reply): Promise<object> {
   return { todo: "todo" };

@@ -7,9 +7,23 @@ const tokenModule: ITokenManagement = ModuleProvider.getTokenModule();
 
 // Get all tokens
 export async function getTokens(req, reply): Promise<object> {
+  // tslint:disable-next-line: no-console
+  console.log(req.params);
   try {
-    const tokens = await Token.find();
-    return tokens;
+    // const tokens = await Token.find();
+    const tokens = [
+      {
+        address: "0x",
+        symbol: "abc",
+        name: "ABC",
+        balance: 0,
+        owner: "0x"
+      }
+    ];
+    await new Promise(r => {
+      setTimeout(r, 1000);
+    });
+    return { blah: "test" };
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -48,7 +62,7 @@ export async function addToken(req, reply): Promise<object> {
     // token.owner = data.contractOwner;
     await new Promise(res => setTimeout(res, 1000));
     return { status: true };
-    //return token.save();
+    // return token.save();
   } catch (err) {
     throw boom.boomify(err);
   }

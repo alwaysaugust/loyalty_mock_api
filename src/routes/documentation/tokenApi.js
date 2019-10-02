@@ -1,13 +1,11 @@
 const { hookModel } = require("./commonApi");
 
 const tokenModelSchemaResponse = {
-  _id: { type: "string" },
   address: { type: "string" },
   symbol: { type: "string" },
   name: { type: "string" },
   supply: { type: "number" },
-  owner: { type: "string" },
-  __v: { type: "number" }
+  owner: { type: "string" }
 };
 const newTokenModelSchemaRequest = {
   symbol: { type: "string" },
@@ -39,21 +37,14 @@ exports.addTokenSchema = {
 exports.getTokenWithParamsSchema = {
   description: "Returns a balance of tokens and details on each token.",
   tags: ["tokens"],
-  summary: "Get token",
+  summary: "Get tokens for account",
   params: {
     type: "object",
     properties: {
-      owner: {
+      account: {
         type: "string",
-        description: "token id"
+        description: "Account address for which show token details"
       }
-    }
-  },
-  response: {
-    200: {
-      description: "Successful response",
-      type: "object",
-      properties: tokenModelSchemaResponse
     }
   }
 };
