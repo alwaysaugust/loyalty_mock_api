@@ -21,7 +21,7 @@
     "aion-web3": "^1.2.6-beta.2",
     "bn.js": "^5.0.0",
     "boom": "^7.3.0",
-    "fastify": "^2.8.0",
+    "fastify": "^2.15.1",
     "fastify-cors": "^2.1.3",
     "fastify-helmet": "^3.0.1",
     "fastify-swagger": "^2.4.0",
